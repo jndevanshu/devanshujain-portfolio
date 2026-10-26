@@ -23,7 +23,7 @@ export interface PublicationItem {
   year: string;
   doi?: string;
   url?: string;
-  type: 'Conference Paper' | 'Technical Disclosure';
+  type: 'Conference Paper' | 'Defensive Publication';
   summary?: string;
 }
 
@@ -148,7 +148,7 @@ export const portfolioData = {
       venue: 'Technical Disclosure Commons (TD Commons)',
       year: '2025',
       url: 'https://www.tdcommons.org/',
-      type: 'Technical Disclosure',
+      type: 'Defensive Publication',
       summary: 'System architecture for disaggregating and routing partitioned deep neural network submodels across heterogeneous CPU/GPU/TPU pools.'
     },
     {
