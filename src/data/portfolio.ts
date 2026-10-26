@@ -62,7 +62,7 @@ export const portfolioData = {
     email: 'jndevanshu@gmail.com',
     resumeNotice: 'Resume available upon request.',
     bioParagraphs: [
-      'I am a Staff Machine Learning Systems Engineer at Google Cloud (Core ML) with 8 years of industry experience in recommendation systems and large-scale retrieval and ranking. Currently, I focus on open-source LLM inference on Google TPUs, serving as a core contributor to google/tpu-sync and the PyTorch-native TPU backend for SGLang (sglang-torchtpu). Previously, I was a Staff Software Engineer and Tech Lead at YouTube, where I architected foundational retrieval and ranking systems across YouTube long-form Videos and Shorts.',
+      'I am a Staff Machine Learning Engineer at Google Cloud with 8 years of industry experience in recommendation systems and large-scale retrieval and ranking, currently focused on open-source LLM inference on TPUs.',
       'Outside of work, I am an avid smart home and IoT enthusiast who enjoys experimenting with all kinds of smart lighting setups at home. When I am unplugged, I love long-distance running and exploring the underwater world as an Advanced Open Water certified scuba diver.'
     ]
   },
