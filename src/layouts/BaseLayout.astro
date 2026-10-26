@@ -6,8 +6,38 @@ interface Props {
 
 const {
   title = 'Devanshu Jain — Staff Software Engineer, Machine Learning | Google Cloud',
-  description = 'Personal portfolio of Devanshu Jain — Staff ML Software Engineer at Google Cloud (LLM Inference on TPUs) & former YouTube Recommendations Tech Lead. UPenn MSE CIS.'
+  description = 'Personal portfolio of Devanshu Jain — Staff Machine Learning Engineer at Google Cloud (LLM Inference on TPUs) & former YouTube Recommendations Tech Lead. UPenn MSE CIS.'
 } = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://devanshujain.dev');
+
+const personSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Devanshu Jain',
+  url: 'https://devanshujain.dev',
+  image: 'https://devanshujain.dev/profile.jpg',
+  jobTitle: 'Staff Software Engineer, Machine Learning',
+  worksFor: {
+    '@type': 'Organization',
+    name: 'Google Cloud'
+  },
+  alumniOf: [
+    {
+      '@type': 'CollegeOrUniversity',
+      name: 'University of Pennsylvania'
+    },
+    {
+      '@type': 'CollegeOrUniversity',
+      name: 'Dhirubhai Ambani University'
+    }
+  ],
+  sameAs: [
+    'https://www.linkedin.com/in/jndevanshu/',
+    'https://github.com/jndevanshu',
+    'https://scholar.google.com/citations?user=vVnK7c8AAAAJ'
+  ]
+};
 ---
 
 <!doctype html>
@@ -18,14 +48,23 @@ const {
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta name="author" content="Devanshu Jain" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href={canonicalURL} />
+    <link rel="sitemap" href="/sitemap.xml" />
 
     <!-- OpenGraph / Social Meta -->
     <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
+    <meta property="og:image" content="https://devanshujain.dev/profile.jpg" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content="https://devanshujain.dev/profile.jpg" />
+
+    <!-- Schema.org JSON-LD for Google Knowledge Graph & Search Indexing -->
+    <script type="application/ld+json" set:html={JSON.stringify(personSchema)} />
 
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
