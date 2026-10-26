@@ -180,7 +180,7 @@ export const portfolioData = {
       category: 'Open Source / LLM Infrastructure',
       description:
         'Core contributor to Google’s open-source C++ and Python library for high-performance Key-Value (KV) cache orchestration, multi-tiered memory management (HBM/DRAM), and zero-copy cross-node DMA data transfers on Google Cloud TPUs.',
-      tags: ['C++', 'Python', 'Cloud TPU', 'KV-Cache', 'DMA / Zero-Copy', 'LLM Inference'],
+      tags: ['KV-Cache', 'HiCaching'],
       repoUrl: 'https://github.com/google/tpu-sync',
       featured: true
     },
@@ -190,17 +190,17 @@ export const portfolioData = {
       category: 'Open Source / LLM Infrastructure',
       description:
         'Core contributor to the PyTorch-native TPU backend and plugin for SGLang, enabling high-concurrency LLM and VLM serving on Google TPUs with unified KV-cache pooling, prefix caching, and disaggregated prefill/decode execution.',
-      tags: ['PyTorch', 'SGLang', 'TorchTPU', 'XLA / Pallas', 'Prefix Caching'],
+      tags: ['SGLang', 'TorchTPU', 'LLM Inference'],
       repoUrl: 'https://github.com/sgl-project/sglang-torchtpu',
       featured: true
     },
     {
       title: 'private-cloud',
-      subtitle: 'Distributed Fault-Tolerant Cloud Platform (PennCloud)',
+      subtitle: 'Fault-Tolerant Distributed Cloud Platform',
       category: 'Distributed Systems',
       description:
-        'Designed and implemented a fault-tolerant distributed cloud platform in C++ featuring a replicated key-value tablet datastore with master-node coordination, checkpointing, and write-ahead logging, backing load-balanced webmail and cloud drive services.',
-      tags: ['C++', 'Distributed Systems', 'Fault Tolerance', 'Key-Value Store', 'Load Balancing'],
+        'Developed a fault-tolerant distributed cloud platform in C++ featuring a front-end load balancer, a multithreaded TCP-based HTTP server with CGI script execution, SMTP (with relay) and POP3 email servers, and a distributed storage service supporting file and folder creation, movement, renaming, and deletion.',
+      tags: ['Distributed Systems', 'Distributed Storage', 'RFC 5321 (SMTP)', 'RFC 1939 (POP3)'],
       repoUrl: 'https://github.com/jndevanshu/private-cloud'
     },
     {
@@ -209,17 +209,8 @@ export const portfolioData = {
       category: 'Distributed Systems',
       description:
         'Built a replicated distributed chat server in C++ supporting concurrent multi-room communication across nodes using UDP multicast, implementing unordered, FIFO, and total ordering message delivery protocols.',
-      tags: ['C++', 'UDP Multicast', 'Total Ordering', 'FIFO', 'Distributed Protocols'],
+      tags: ['Distributed Protocols'],
       repoUrl: 'https://github.com/jndevanshu/distributed-chat-system'
-    },
-    {
-      title: 'mail-server',
-      subtitle: 'Multithreaded SMTP & POP3 Email Server',
-      category: 'Distributed Systems',
-      description:
-        'Implemented an RFC-compliant multithreaded email server in C++ supporting SMTP and POP3 protocols, socket-level connection pooling, per-user mailbox synchronization, and full interoperability with Mozilla Thunderbird.',
-      tags: ['C++', 'SMTP / POP3', 'Multithreading', 'Socket Programming', 'Systems'],
-      repoUrl: 'https://github.com/jndevanshu/mail-server'
     },
     {
       title: 'text_simplification',
@@ -227,7 +218,7 @@ export const portfolioData = {
       category: 'Machine Learning & NLP',
       description:
         'Built a neural text simplification pipeline using attentional bidirectional RNN sequence-to-sequence (Seq2Seq) models on the Newsela dataset, combining named entity anonymization, diverse beam-search clustering, and LSTM language model perplexity reranking evaluated with SARI and BLEU.',
-      tags: ['Python', 'PyTorch', 'Seq2Seq / Attention', 'LSTM', 'NLP', 'Text Simplification'],
+      tags: ['Transformer', 'Natural Language Processing'],
       repoUrl: 'https://github.com/jndevanshu/text_simplification'
     },
     {
@@ -236,7 +227,7 @@ export const portfolioData = {
       category: 'Machine Learning & Software Systems',
       description:
         'Developed an adaptive e-learning platform and recommendation engine using Python, Django, and Celery that dynamically personalizes educational content and learning pathways based on student proficiency and interaction telemetry.',
-      tags: ['Python', 'Django', 'Celery', 'Recommender Systems', 'Adaptive Learning'],
+      tags: ['Recommender Systems'],
       repoUrl: 'https://github.com/jndevanshu/recommendation-system-for-adaptive-elearning'
     },
     {
@@ -245,7 +236,7 @@ export const portfolioData = {
       category: 'Software Systems',
       description:
         'Engineered a clinic management application in Java and JavaFX backed by a relational database to manage patient records, doctor scheduling, medical consultations, and automated PDF prescription generation.',
-      tags: ['Java', 'JavaFX', 'SQL', 'Healthcare Systems', 'Object-Oriented Design'],
+      tags: ['Healthcare Systems', 'Object-Oriented Design'],
       repoUrl: 'https://github.com/jndevanshu/clinic-management-system'
     }
   ] satisfies ProjectItem[],
