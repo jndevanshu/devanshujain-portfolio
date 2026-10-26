@@ -64,12 +64,6 @@ export const portfolioData = {
       'I am a Staff Machine Learning Systems Engineer at Google Cloud (Core ML), driving high-performance enablement of open-source models on Google TPUs. I am a core contributor to google/tpu-sync - a TPU-native KV-cache transfer and offloading framework and the PyTorch-native TPU backend for SGLang (sglang-torchtpu).',
       'Previously, I spent eight years at YouTube as a Staff Software Engineer and Tech Lead for Recommendations Quality & Retrieval, driving foundational deep learning retrieval architectures, distributed TPU training, and heterogeneous disaggregated serving engines across YouTube long form Videos and Shorts.',
       'I hold an M.S.E. in Computer and Information Science from the University of Pennsylvania and a B.Tech. in Information and Communication Technology from Dhirubhai Ambani University, and publish research at venues including ACM RecSys and ACL.'
-    ],
-    atAGlance: [
-      { label: 'Current Role', value: 'Staff SWE, ML @ Google Cloud (Core ML)' },
-      { label: 'Focus Areas', value: 'LLM Inference on TPUs, KV-Cache, Large-Scale RecSys' },
-      { label: 'Previous Experience', value: 'YouTube · Uber · Amazon' },
-      { label: 'Education', value: 'M.S.E. CIS, University of Pennsylvania' }
     ]
   },
 
