@@ -30,7 +30,7 @@ export interface PublicationItem {
 export interface ProjectItem {
   title: string;
   subtitle: string;
-  category: 'Open Source / LLM Infrastructure' | 'Distributed Systems' | 'Machine Learning & Software Systems' | 'Software Systems';
+  category: 'Open Source / LLM Infrastructure' | 'Distributed Systems' | 'Machine Learning & Software Systems' | 'Machine Learning & NLP' | 'Software Systems';
   description: string;
   tags: string[];
   repoUrl?: string;
@@ -220,6 +220,15 @@ export const portfolioData = {
         'Implemented an RFC-compliant multithreaded email server in C++ supporting SMTP and POP3 protocols, socket-level connection pooling, per-user mailbox synchronization, and full interoperability with Mozilla Thunderbird.',
       tags: ['C++', 'SMTP / POP3', 'Multithreading', 'Socket Programming', 'Systems'],
       repoUrl: 'https://github.com/jndevanshu/mail-server'
+    },
+    {
+      title: 'text_simplification',
+      subtitle: 'Deep Learning-Based Text Simplification',
+      category: 'Machine Learning & NLP',
+      description:
+        'Built a neural text simplification pipeline using attentional bidirectional RNN sequence-to-sequence (Seq2Seq) models on the Newsela dataset, combining named entity anonymization, diverse beam-search clustering, and LSTM language model perplexity reranking evaluated with SARI and BLEU.',
+      tags: ['Python', 'PyTorch', 'Seq2Seq / Attention', 'LSTM', 'NLP', 'Text Simplification'],
+      repoUrl: 'https://github.com/jndevanshu/text_simplification'
     },
     {
       title: 'recommendation-system-for-adaptive-elearning',
