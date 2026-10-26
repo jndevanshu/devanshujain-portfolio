@@ -1,0 +1,78 @@
+---
+import { type CollectionEntry, getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Navbar from '../../components/Navbar.astro';
+import ContactFooter from '../../components/ContactFooter.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: post,
+  }));
+}
+
+type Props = CollectionEntry<'blog'>;
+
+const post = Astro.props;
+const { Content } = await post.render();
+---
+
+<BaseLayout
+  title={`${post.data.title} — Devanshu Jain`}
+  description={post.data.description}
+>
+  <Navbar />
+  <main class="flex-grow py-12 sm:py-20 border-b border-border">
+    <article class="max-w-3xl mx-auto px-5 sm:px-8">
+      <!-- Article Header -->
+      <header class="border-b border-border pb-8 mb-10">
+        <a
+          href="/blog"
+          class="inline-flex items-center gap-1.5 font-mono text-xs text-accent hover:underline mb-5"
+        >
+          <span>←</span>
+          <span>All Engineering Notes</span>
+        </a>
+
+        <div class="flex flex-wrap items-center gap-3 text-xs font-mono text-ink-subtle mb-3">
+          <time datetime={post.data.pubDate.toISOString()}>
+            {post.data.pubDate.toLocaleDateString('en-US', {
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric',
+            })}
+          </time>
+          {post.data.readingTime && (
+            <>
+              <span>•</span>
+              <span>{post.data.readingTime}</span>
+            </>
+          )}
+        </div>
+
+        <h1 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-medium text-ink tracking-tight leading-[1.15]">
+          {post.data.title}
+        </h1>
+
+        <p class="mt-4 text-base sm:text-lg text-ink-muted leading-relaxed">
+          {post.data.description}
+        </p>
+
+        <div class="mt-5 flex flex-wrap gap-1.5">
+          {post.data.tags.map((tag) => (
+            <span class="font-mono text-[11px] px-2.5 py-0.5 rounded bg-surface border border-border text-ink-muted">
+              {tag}
+            </span>
+          ))}
+        </div>
+      </header>
+
+      <!-- Rendered MDX / Markdown + KaTeX Body -->
+      <div class="prose prose-slate max-w-none prose-headings:font-serif prose-headings:font-medium prose-headings:text-ink prose-a:text-accent prose-code:font-mono prose-pre:bg-surface prose-pre:border prose-pre:border-border">
+        <Content />
+      </div>
+    </article>
+  </main>
+  <ContactFooter />
+</BaseLayout>

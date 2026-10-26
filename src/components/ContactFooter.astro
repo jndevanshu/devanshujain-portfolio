@@ -1,0 +1,79 @@
+---
+import { portfolioData } from '../data/portfolio';
+
+const { profile, socials } = portfolioData;
+---
+
+<footer id="contact" class="py-16 sm:py-24 bg-surface">
+  <div class="max-w-5xl mx-auto px-5 sm:px-8">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start pb-14 border-b border-border">
+      <!-- Left Column: Call to Action -->
+      <div class="lg:col-span-7">
+        <span class="font-mono text-xs uppercase tracking-widest text-accent font-semibold">
+          06 / Connect & Collaborate
+        </span>
+        <h2 class="font-serif text-3xl sm:text-4xl font-medium text-ink mt-1 tracking-tight">
+          Get in Touch
+        </h2>
+        <p class="mt-3 text-base text-ink-muted leading-relaxed max-w-xl">
+          Whether you want to discuss large-scale LLM inference on TPUs, recommender systems architecture, research collaborations, or engineering opportunities, feel free to connect and reach out on LinkedIn.
+        </p>
+
+        <!-- Resume Notice & Primary LinkedIn CTA -->
+        <div class="mt-6 flex flex-wrap items-center gap-3">
+          <a
+            href="https://www.linkedin.com/in/jndevanshu/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-2.5 px-5 py-3 rounded-lg bg-ink text-paper hover:bg-accent font-medium text-sm transition-colors shadow-sm"
+          >
+            <svg class="w-4 h-4 shrink-0" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z" />
+            </svg>
+            <span>Message on LinkedIn</span>
+            <span class="text-xs font-mono text-paper/80">↗</span>
+          </a>
+
+          <div class="inline-flex items-center gap-2 px-4 py-3 rounded-lg bg-paper border border-border text-xs font-mono font-medium text-ink">
+            <span>📄</span>
+            <span>Full resume available upon request</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column: Social Directory Cards -->
+      <div class="lg:col-span-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-3">
+        {socials.map((social) => (
+          <a
+            href={social.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="group flex items-center justify-between p-4 rounded-xl bg-paper border border-border hover:border-ink/40 transition-all"
+          >
+            <div>
+              <div class="text-xs font-mono uppercase tracking-wider text-ink-subtle">
+                {social.name}
+              </div>
+              <div class="text-sm font-medium text-ink group-hover:text-accent transition-colors mt-0.5">
+                {social.label}
+              </div>
+            </div>
+            <span class="font-mono text-sm text-ink-subtle group-hover:text-accent group-hover:translate-x-0.5 transition-all">
+              ↗
+            </span>
+          </a>
+        ))}
+      </div>
+    </div>
+
+    <!-- Bottom Colophon -->
+    <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-ink-subtle font-mono">
+      <div>
+        © {new Date().getFullYear()} {profile.name}
+      </div>
+      <div class="flex items-center gap-4">
+        <a href="/#bio" class="hover:text-ink transition-colors">Top ↑</a>
+      </div>
+    </div>
+  </div>
+</footer>

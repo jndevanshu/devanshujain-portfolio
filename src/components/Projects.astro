@@ -1,0 +1,96 @@
+---
+import { portfolioData } from '../data/portfolio';
+
+const { projects } = portfolioData;
+---
+
+<section id="projects" class="py-14 sm:py-20 border-b border-border">
+  <div class="max-w-5xl mx-auto px-5 sm:px-8">
+    <!-- Section Header -->
+    <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-10 sm:mb-12 gap-2">
+      <div>
+        <span class="font-mono text-xs uppercase tracking-widest text-accent font-semibold">
+          03 / Open Source & Systems
+        </span>
+        <h2 class="font-serif text-3xl sm:text-4xl font-medium text-ink mt-1 tracking-tight">
+          Projects & Contributions
+        </h2>
+      </div>
+      <a
+        href="https://github.com/jndevanshu"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center gap-1.5 font-mono text-xs text-accent hover:underline"
+      >
+        <span>github.com/jndevanshu</span>
+        <span>↗</span>
+      </a>
+    </div>
+
+    <!-- Projects Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6">
+      {projects.map((project) => (
+        <article
+          class:list={[
+            'bg-surface border border-border rounded-xl p-5 sm:p-6 flex flex-col justify-between hover:border-ink/35 transition-all',
+            project.featured ? 'md:col-span-1 ring-1 ring-accent/10' : ''
+          ]}
+        >
+          <div>
+            <!-- Top Row: Category & GitHub Link -->
+            <div class="flex items-center justify-between gap-2 mb-3">
+              <span class="font-mono text-[11px] uppercase tracking-wider px-2.5 py-0.5 rounded bg-paper border border-border text-ink-subtle">
+                {project.category}
+              </span>
+              {project.repoUrl && (
+                <a
+                  href={project.repoUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="inline-flex items-center gap-1 font-mono text-xs text-ink-muted hover:text-accent transition-colors"
+                  aria-label={`View ${project.title} repository`}
+                >
+                  <span>Repository</span>
+                  <span>↗</span>
+                </a>
+              )}
+            </div>
+
+            <!-- Title & Subtitle -->
+            <h3 class="font-serif text-xl sm:text-2xl font-medium text-ink leading-snug">
+              {project.repoUrl ? (
+                <a
+                  href={project.repoUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="hover:text-accent transition-colors"
+                >
+                  {project.title}
+                </a>
+              ) : (
+                project.title
+              )}
+            </h3>
+            <p class="font-mono text-xs text-accent mt-0.5">
+              {project.subtitle}
+            </p>
+
+            <!-- Description -->
+            <p class="mt-3 text-sm text-ink-muted leading-relaxed">
+              {project.description}
+            </p>
+          </div>
+
+          <!-- Tech Tags -->
+          <div class="mt-5 pt-3.5 border-t border-border flex flex-wrap gap-1.5">
+            {project.tags.map((tag) => (
+              <span class="font-mono text-[11px] px-2 py-0.5 rounded bg-paper text-ink-muted border border-border">
+                {tag}
+              </span>
+            ))}
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

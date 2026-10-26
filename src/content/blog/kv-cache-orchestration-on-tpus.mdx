@@ -1,0 +1,46 @@
+---
+title: "Unified KV-Cache Orchestration for Hybrid Attention Models on TPUs"
+description: "Architectural notes on managing prefix caching, HBM memory fragmentation, and cross-tier offloading for high-concurrency LLM inference."
+pubDate: 2026-09-15
+tags: ["LLM Inference", "Cloud TPU", "KV-Cache", "SGLang"]
+readingTime: "5 min read"
+draft: false
+---
+
+Modern Large Language Model (LLM) serving workloads are overwhelmingly memory-bandwidth and capacity bound during the autoregressive decode phase. As context lengths scale and models adopt **Hybrid Attention** mechanisms—interleaving global full self-attention layers with local sliding-window or linear attention states—traditional uniform paging allocators suffer from severe internal fragmentation and degraded prefix cache hit rates.
+
+## 1. The Memory Bottleneck in Hybrid Attention
+
+In standard Transformer architectures, every layer caches Key and Value tensors of identical spatial dimensions per token. For a batch of sequences with context length $L$, number of KV heads $H_{kv}$, and head dimension $d_k$, the per-layer KV footprint is given by:
+
+$$
+\text{Bytes}_{\text{KV}}(L) = 2 \cdot L \cdot H_{kv} \cdot d_k \cdot \text{sizeof}(\text{dtype})
+$$
+
+However, in **Hybrid Attention Models**, global attention layers retain tokens across the entire sequence $L$, whereas sliding-window or recurrent layers only require a fixed window $W \ll L$. Allocating uniform fixed-stride blocks across both layer types either wastes high-bandwidth memory (HBM) or breaks prefix-tree sharing across multi-turn prompts.
+
+## 2. Unified KV-Cache Pool & Tiered Offloading
+
+By decoupling physical page allocation in HBM from logical prefix radix trees and orchestrating asynchronous DMA transfers between TPU HBM and host DRAM via [`google/tpu-sync`](https://github.com/google/tpu-sync):
+
+1. **Unified Pool Allocation**: Global attention states and fixed-window states draw from a unified page pool with layer-aware block descriptors.
+2. **Zero-Copy Host Offloading**: Cold prefix blocks are asynchronously evicted to host DRAM and prefetched back into HBM before prefill execution.
+
+```python
+# Conceptual example: Registering a unified KV pool on TPU
+from tpu_sync import KVCacheManager, MemoryTier
+
+kv_manager = KVCacheManager(
+    device_tier=MemoryTier.TPU_HBM,
+    offload_tier=MemoryTier.HOST_DRAM,
+    enable_hybrid_pooling=True,
+)
+```
+
+### Empirical Impact at High Concurrency
+
+In production benchmarks on PyTorch-native TPU backends for SGLang, unifying the KV-cache pool across hybrid attention layers delivered:
+
+- **Prefix Cache Hit Rate**: Improved from **11% to 44%** under high concurrency.
+- **Output Throughput**: Increased by **+47%** tokens/sec.
+- **Mean Time-To-First-Token (TTFT)**: Reduced by **-61%**.

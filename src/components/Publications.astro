@@ -1,0 +1,105 @@
+---
+import { portfolioData } from '../data/portfolio';
+
+const { publications } = portfolioData;
+---
+
+<section id="publications" class="py-14 sm:py-20 border-b border-border">
+  <div class="max-w-5xl mx-auto px-5 sm:px-8">
+    <!-- Section Header -->
+    <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-10 sm:mb-12 gap-2">
+      <div>
+        <span class="font-mono text-xs uppercase tracking-widest text-accent font-semibold">
+          02 / Research & IP
+        </span>
+        <h2 class="font-serif text-3xl sm:text-4xl font-medium text-ink mt-1 tracking-tight">
+          Publications & Technical Disclosures
+        </h2>
+      </div>
+      <a
+        href="https://scholar.google.com/scholar?q=author%3A%22Devanshu+Jain%22"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center gap-1.5 font-mono text-xs text-accent hover:underline"
+      >
+        <span>View on Google Scholar</span>
+        <span>↗</span>
+      </a>
+    </div>
+
+    <!-- Bibliography List -->
+    <div class="space-y-4">
+      {publications.map((pub, idx) => (
+        <article class="bg-surface border border-border rounded-xl p-5 sm:p-6 hover:border-ink/30 transition-colors">
+          <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
+            <div class="space-y-2 max-w-3xl">
+              <!-- Venue & Year Badges -->
+              <div class="flex flex-wrap items-center gap-2">
+                <span class="font-mono text-xs font-semibold px-2.5 py-0.5 rounded bg-ink text-paper">
+                  {pub.venue} {pub.year}
+                </span>
+                <span class="font-mono text-xs px-2 py-0.5 rounded bg-paper border border-border text-ink-subtle">
+                  {pub.type}
+                </span>
+                {pub.doi && (
+                  <span class="font-mono text-xs text-ink-subtle">
+                    DOI: {pub.doi}
+                  </span>
+                )}
+              </div>
+
+              <!-- Title -->
+              <h3 class="font-serif text-xl sm:text-2xl font-medium text-ink leading-snug pt-0.5">
+                {pub.url ? (
+                  <a
+                    href={pub.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="hover:text-accent transition-colors"
+                  >
+                    {pub.title}
+                  </a>
+                ) : (
+                  pub.title
+                )}
+              </h3>
+
+              <!-- Authors with D. Jain highlighted -->
+              <p class="text-sm text-ink-muted leading-relaxed">
+                {pub.authors.map((author, i) => (
+                  <>
+                    <span class:list={[author.includes('D. Jain') ? 'font-semibold text-ink underline decoration-accent/60 underline-offset-4' : '']}>
+                      {author}
+                    </span>
+                    {i < pub.authors.length - 1 ? ', ' : ''}
+                  </>
+                ))}
+              </p>
+
+              {pub.summary && (
+                <p class="text-xs sm:text-sm text-ink-subtle pt-1 leading-relaxed">
+                  {pub.summary}
+                </p>
+              )}
+            </div>
+
+            <!-- Action / DOI Link -->
+            {pub.url && (
+              <div class="shrink-0 pt-2 sm:pt-0">
+                <a
+                  href={pub.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-border bg-paper hover:bg-ink hover:text-paper hover:border-ink text-xs font-mono font-medium transition-colors"
+                >
+                  <span>{pub.doi ? 'DOI / Paper' : 'Disclosure'}</span>
+                  <span>↗</span>
+                </a>
+              </div>
+            )}
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

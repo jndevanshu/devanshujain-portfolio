@@ -1,0 +1,108 @@
+---
+import { portfolioData } from '../data/portfolio';
+
+const { profile, socials } = portfolioData;
+---
+
+<section id="bio" class="pt-10 pb-14 sm:pt-16 sm:pb-20 border-b border-border">
+  <div class="max-w-5xl mx-auto px-5 sm:px-8">
+    <!-- Top Editorial Eyebrow -->
+    <div class="flex flex-wrap items-center gap-2.5 text-xs font-mono uppercase tracking-widest text-ink-subtle mb-5">
+      <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-accent-light text-accent border border-accent-border font-medium normal-case tracking-normal">
+        <span class="w-1.5 h-1.5 rounded-full bg-accent animate-pulse"></span>
+        {profile.organization} · Core ML
+      </span>
+      <span>•</span>
+      <span>{profile.location}</span>
+    </div>
+
+    <!-- Main Editorial Heading -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+      <div class="lg:col-span-8">
+        <h1 class="font-serif text-4xl sm:text-5xl lg:text-[3.5rem] font-medium text-ink tracking-tight leading-[1.1]">
+          {profile.name}
+        </h1>
+        <p class="mt-3 font-serif italic text-xl sm:text-2xl text-ink-muted leading-snug">
+          {profile.title} — <span class="text-ink not-italic font-normal">{profile.organization}</span>
+        </p>
+
+        <!-- Narrative Bio -->
+        <div class="mt-6 space-y-4 text-base sm:text-[17px] text-ink-muted leading-relaxed">
+          {profile.bioParagraphs.map((paragraph) => (
+            <p>{paragraph}</p>
+          ))}
+        </div>
+
+        <!-- Social Action Pills & Resume Notice -->
+        <div class="mt-8 flex flex-wrap items-center gap-2.5">
+          {socials.map((social, idx) => (
+            <a
+              href={social.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              class:list={[
+                'inline-flex items-center gap-2 px-3.5 py-2 rounded-lg text-sm font-medium transition-all border',
+                idx === 0
+                  ? 'bg-ink text-paper border-ink hover:bg-accent hover:border-accent shadow-sm'
+                  : 'bg-surface text-ink border-border hover:border-ink/40 hover:bg-black/[0.02]'
+              ]}
+            >
+              {social.icon === 'github' && (
+                <svg class="w-4 h-4 shrink-0" fill="currentColor" viewBox="0 0 24 24">
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
+                </svg>
+              )}
+              {social.icon === 'linkedin' && (
+                <svg class="w-4 h-4 shrink-0" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z" />
+                </svg>
+              )}
+              {social.icon === 'scholar' && (
+                <svg class="w-4 h-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15a.75.75 0 100-1.5.75.75 0 000 1.5zm0 0v-3.675A55.378 55.378 0 0112 8.443m-7.007 11.55A5.981 5.981 0 006.75 15.75v-1.5" />
+                </svg>
+              )}
+              <span>{social.name}</span>
+              <span class:list={['text-xs font-mono', idx === 0 ? 'text-paper/80' : 'text-ink-subtle']}>↗</span>
+            </a>
+          ))}
+
+          <span class="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-mono text-ink-subtle bg-paper border border-border">
+            <span>📄</span>
+            <span>{profile.resumeNotice}</span>
+          </span>
+        </div>
+      </div>
+
+      <!-- Right Rail: Profile Summary Card -->
+      <aside class="lg:col-span-4 bg-surface border border-border rounded-xl p-5 sm:p-6 shadow-[0_1px_2px_rgba(0,0,0,0.03)]">
+        <div class="flex items-center justify-between border-b border-border pb-3 mb-4">
+          <h2 class="font-mono text-xs uppercase tracking-widest text-ink-subtle font-semibold">
+            At a Glance
+          </h2>
+          <span class="font-mono text-[11px] text-accent">Profile</span>
+        </div>
+
+        <dl class="space-y-3.5">
+          {profile.atAGlance.map((item) => (
+            <div class="border-l-2 border-accent/80 pl-3.5 py-0.5">
+              <dt class="font-mono text-[11px] uppercase tracking-wider text-ink-subtle">
+                {item.label}
+              </dt>
+              <dd class="text-sm font-medium text-ink leading-snug mt-0.5">
+                {item.value}
+              </dd>
+            </div>
+          ))}
+        </dl>
+
+        <div class="mt-5 pt-4 border-t border-border flex items-center justify-between text-xs text-ink-subtle font-mono">
+          <span>Full CV / Resume</span>
+          <a href="#contact" class="text-accent font-medium hover:underline">
+            Available on request →
+          </a>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>

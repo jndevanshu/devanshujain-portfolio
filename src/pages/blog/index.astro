@@ -1,0 +1,87 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Navbar from '../../components/Navbar.astro';
+import ContactFooter from '../../components/ContactFooter.astro';
+
+const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+---
+
+<BaseLayout
+  title="Engineering Notes & Blog — Devanshu Jain"
+  description="Technical notes on LLM inference on TPUs, KV-cache orchestration, and large-scale recommendation systems by Devanshu Jain."
+>
+  <Navbar />
+  <main class="flex-grow py-12 sm:py-20 border-b border-border">
+    <div class="max-w-4xl mx-auto px-5 sm:px-8">
+      <!-- Header -->
+      <div class="border-b border-border pb-8 mb-10">
+        <a
+          href="/"
+          class="inline-flex items-center gap-1.5 font-mono text-xs text-accent hover:underline mb-4"
+        >
+          <span>←</span>
+          <span>Back to Portfolio</span>
+        </a>
+        <h1 class="font-serif text-3xl sm:text-5xl font-medium text-ink tracking-tight">
+          Engineering Notes
+        </h1>
+        <p class="mt-3 text-base sm:text-lg text-ink-muted leading-relaxed">
+          Long-form technical notes on Large Language Model serving infrastructure, Cloud TPU memory systems, and large-scale retrieval architectures.
+        </p>
+      </div>
+
+      <!-- Post List -->
+      <div class="space-y-6">
+        {posts.map((post) => (
+          <article class="bg-surface border border-border rounded-xl p-6 sm:p-8 hover:border-ink/40 transition-colors">
+            <div class="flex flex-wrap items-center gap-3 text-xs font-mono text-ink-subtle mb-2.5">
+              <time datetime={post.data.pubDate.toISOString()}>
+                {post.data.pubDate.toLocaleDateString('en-US', {
+                  year: 'numeric',
+                  month: 'short',
+                  day: 'numeric',
+                })}
+              </time>
+              {post.data.readingTime && (
+                <>
+                  <span>•</span>
+                  <span>{post.data.readingTime}</span>
+                </>
+              )}
+            </div>
+
+            <h2 class="font-serif text-2xl sm:text-3xl font-medium text-ink leading-snug">
+              <a href={`/blog/${post.slug}`} class="hover:text-accent transition-colors">
+                {post.data.title}
+              </a>
+            </h2>
+
+            <p class="mt-2.5 text-sm sm:text-base text-ink-muted leading-relaxed">
+              {post.data.description}
+            </p>
+
+            <div class="mt-5 flex flex-wrap items-center justify-between gap-3 pt-4 border-t border-border">
+              <div class="flex flex-wrap gap-1.5">
+                {post.data.tags.map((tag) => (
+                  <span class="font-mono text-[11px] px-2.5 py-0.5 rounded bg-paper border border-border text-ink-muted">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+              <a
+                href={`/blog/${post.slug}`}
+                class="font-mono text-xs font-medium text-accent hover:underline"
+              >
+                Read article →
+              </a>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </main>
+  <ContactFooter />
+</BaseLayout>

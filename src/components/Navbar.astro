@@ -1,0 +1,111 @@
+---
+const navItems = [
+  { label: 'Bio', href: '/#bio' },
+  { label: 'Experience', href: '/#experience' },
+  { label: 'Publications', href: '/#publications' },
+  { label: 'Projects', href: '/#projects' },
+  { label: 'Skills', href: '/#skills' },
+  { label: 'Education', href: '/#education' },
+  { label: 'Contact', href: '/#contact' },
+];
+---
+
+<header class="sticky top-0 z-50 bg-paper/90 backdrop-blur-md border-b border-border transition-colors">
+  <div class="max-w-5xl mx-auto px-5 sm:px-8 h-16 flex items-center justify-between">
+    <!-- Brand / Monogram -->
+    <a
+      href="/"
+      class="group flex items-center gap-3 text-ink hover:text-accent transition-colors focus:outline-none"
+      aria-label="Devanshu Jain Home"
+    >
+      <span class="w-8 h-8 rounded bg-ink text-paper font-serif font-semibold text-sm flex items-center justify-center tracking-tight group-hover:bg-accent transition-colors">
+        DJ
+      </span>
+      <div class="flex flex-col">
+        <span class="font-serif font-semibold text-lg leading-none tracking-tight">
+          Devanshu Jain
+        </span>
+        <span class="font-mono text-[10px] uppercase tracking-widest text-ink-subtle mt-0.5 hidden sm:inline">
+          Staff ML Engineer · Google Cloud
+        </span>
+      </div>
+    </a>
+
+    <!-- Desktop Navigation -->
+    <nav class="hidden md:flex items-center gap-1 lg:gap-2" aria-label="Primary Navigation">
+      {navItems.map((item) => (
+        <a
+          href={item.href}
+          class="px-2.5 py-1.5 text-sm font-medium text-ink-muted hover:text-ink hover:bg-black/[0.04] rounded-md transition-colors"
+        >
+          {item.label}
+        </a>
+      ))}
+    </nav>
+
+    <!-- Mobile Menu Button -->
+    <button
+      id="mobile-menu-btn"
+      type="button"
+      class="md:hidden inline-flex items-center justify-center p-2 rounded-md text-ink-muted hover:text-ink hover:bg-black/[0.05] focus:outline-none"
+      aria-controls="mobile-menu"
+      aria-expanded="false"
+      aria-label="Toggle navigation menu"
+    >
+      <svg id="menu-icon-open" class="h-6 w-6 block" fill="none" viewBox="0 0 24 24" stroke-width="1.75" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+      </svg>
+      <svg id="menu-icon-close" class="h-6 w-6 hidden" fill="none" viewBox="0 0 24 24" stroke-width="1.75" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+  </div>
+
+  <!-- Mobile Drawer -->
+  <div id="mobile-menu" class="hidden md:hidden border-b border-border bg-paper px-5 pt-2 pb-5 space-y-1 shadow-sm">
+    <div class="grid grid-cols-2 gap-1.5 pt-1">
+      {navItems.map((item) => (
+        <a
+          href={item.href}
+          class="mobile-nav-link px-3 py-2.5 rounded-md text-sm font-medium text-ink-muted hover:text-ink hover:bg-black/[0.04] transition-colors flex items-center justify-between border border-transparent hover:border-border"
+        >
+          <span>{item.label}</span>
+          <span class="text-xs text-ink-subtle">→</span>
+        </a>
+      ))}
+    </div>
+    <div class="pt-3 mt-2 border-t border-border flex items-center justify-between text-xs font-mono text-ink-subtle">
+      <span>Mountain View, CA</span>
+      <span>Resume available on request</span>
+    </div>
+  </div>
+</header>
+
+<script>
+  function setupMobileMenu() {
+    const btn = document.getElementById('mobile-menu-btn');
+    const menu = document.getElementById('mobile-menu');
+    const openIcon = document.getElementById('menu-icon-open');
+    const closeIcon = document.getElementById('menu-icon-close');
+    const links = document.querySelectorAll('.mobile-nav-link');
+
+    if (!btn || !menu || !openIcon || !closeIcon) return;
+
+    const toggleMenu = (forceClose = false) => {
+      const isExpanded = btn.getAttribute('aria-expanded') === 'true';
+      const nextState = forceClose ? false : !isExpanded;
+      btn.setAttribute('aria-expanded', String(nextState));
+      menu.classList.toggle('hidden', !nextState);
+      openIcon.classList.toggle('hidden', nextState);
+      closeIcon.classList.toggle('hidden', !nextState);
+    };
+
+    btn.addEventListener('click', () => toggleMenu());
+    links.forEach((link) => {
+      link.addEventListener('click', () => toggleMenu(true));
+    });
+  }
+
+  setupMobileMenu();
+  document.addEventListener('astro:after-swap', setupMobileMenu);
+</script>

@@ -1,0 +1,22 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navbar from '../components/Navbar.astro';
+import Hero from '../components/Hero.astro';
+import Experience from '../components/Experience.astro';
+import Publications from '../components/Publications.astro';
+import Projects from '../components/Projects.astro';
+import SkillsAndEducation from '../components/SkillsAndEducation.astro';
+import ContactFooter from '../components/ContactFooter.astro';
+---
+
+<BaseLayout>
+  <Navbar />
+  <main class="flex-grow">
+    <Hero />
+    <Experience />
+    <Publications />
+    <Projects />
+    <SkillsAndEducation />
+  </main>
+  <ContactFooter />
+</BaseLayout>

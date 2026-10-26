@@ -1,0 +1,82 @@
+---
+import { portfolioData } from '../data/portfolio';
+
+const { skills, education } = portfolioData;
+---
+
+<!-- Technical Skills Section -->
+<section id="skills" class="py-14 sm:py-20 border-b border-border">
+  <div class="max-w-5xl mx-auto px-5 sm:px-8">
+    <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-10 sm:mb-12 gap-2">
+      <div>
+        <span class="font-mono text-xs uppercase tracking-widest text-accent font-semibold">
+          04 / Technical Stack
+        </span>
+        <h2 class="font-serif text-3xl sm:text-4xl font-medium text-ink mt-1 tracking-tight">
+          Skills & Domain Expertise
+        </h2>
+      </div>
+      <p class="text-sm text-ink-subtle font-mono">
+        TPUs · Distributed Systems · Deep Learning
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6">
+      {skills.map((group) => (
+        <div class="bg-surface border border-border rounded-xl p-5 sm:p-6">
+          <h3 class="font-serif text-xl font-medium text-ink">
+            {group.category}
+          </h3>
+          <p class="text-xs text-ink-subtle mt-1">
+            {group.description}
+          </p>
+          <div class="mt-4 flex flex-wrap gap-2">
+            {group.skills.map((skill) => (
+              <span class="px-3 py-1.5 rounded-lg bg-paper border border-border font-mono text-xs font-medium text-ink">
+                {skill}
+              </span>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- Education Section -->
+<section id="education" class="py-14 sm:py-20 border-b border-border">
+  <div class="max-w-5xl mx-auto px-5 sm:px-8">
+    <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-10 sm:mb-12 gap-2">
+      <div>
+        <span class="font-mono text-xs uppercase tracking-widest text-accent font-semibold">
+          05 / Academic Credentials
+        </span>
+        <h2 class="font-serif text-3xl sm:text-4xl font-medium text-ink mt-1 tracking-tight">
+          Education
+        </h2>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6">
+      {education.map((edu) => (
+        <article class="bg-surface border border-border rounded-xl p-5 sm:p-6 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between gap-2 text-xs font-mono text-ink-subtle mb-2">
+              <span>{edu.period}</span>
+              <span>{edu.location}</span>
+            </div>
+            <h3 class="font-serif text-2xl font-medium text-ink">
+              {edu.institution}
+            </h3>
+            <p class="text-sm sm:text-base font-medium text-ink-muted mt-1">
+              {edu.degree}
+            </p>
+            <p class="text-xs sm:text-sm text-ink-subtle mt-0.5">
+              {edu.field}
+            </p>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

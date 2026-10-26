@@ -1,0 +1,62 @@
+name: Deploy Portfolio to Google Cloud Run
+
+on:
+  push:
+    branches:
+      - main
+      - master
+  workflow_dispatch:
+
+env:
+  PROJECT_ID: ${{ vars.GCP_PROJECT_ID }}
+  REGION: ${{ vars.GCP_REGION || 'us-central1' }}
+  SERVICE_NAME: ${{ vars.CLOUD_RUN_SERVICE || 'portfolio' }}
+
+jobs:
+  build-and-deploy:
+    name: Build & Deploy to Cloud Run
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: 'read'
+      id-token: 'write' # Required for Google Cloud Workload Identity Federation (keyless auth)
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies & verify Astro build
+        run: |
+          npm ci
+          npm run build
+
+      - name: Authenticate to Google Cloud
+        id: auth
+        uses: google-github-actions/auth@v2
+        with:
+          # Supports EITHER keyless Workload Identity Federation OR a Service Account JSON secret:
+          workload_identity_provider: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: ${{ secrets.GCP_SERVICE_ACCOUNT }}
+          credentials_json: ${{ secrets.GCP_SA_KEY }}
+
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v2
+
+      - name: Deploy to Google Cloud Run from source
+        id: deploy
+        uses: google-github-actions/deploy-cloudrun@v2
+        with:
+          service: ${{ env.SERVICE_NAME }}
+          project_id: ${{ env.PROJECT_ID }}
+          region: ${{ env.REGION }}
+          source: .
+          flags: '--allow-unauthenticated --port=8080'
+
+      - name: Print Deployed Cloud Run URL
+        run: echo "Deployed successfully to ${{ steps.deploy.outputs.url }}"
