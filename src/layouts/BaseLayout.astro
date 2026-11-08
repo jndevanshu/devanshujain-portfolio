@@ -9,14 +9,14 @@ const {
   description = 'Personal portfolio of Devanshu Jain — Staff Machine Learning Engineer at Google Cloud (LLM Inference on TPUs) & former YouTube Recommendations Tech Lead. UPenn MSE CIS.'
 } = Astro.props;
 
-const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://devanshujain.dev');
+const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://standarddev.io');
 
 const personSchema = {
   '@context': 'https://schema.org',
   '@type': 'Person',
   name: 'Devanshu Jain',
-  url: 'https://devanshujain.dev',
-  image: 'https://devanshujain.dev/profile.jpg',
+  url: 'https://standarddev.io',
+  image: 'https://standarddev.io/profile.jpg',
   jobTitle: 'Staff Software Engineer, Machine Learning',
   worksFor: {
     '@type': 'Organization',
@@ -33,6 +33,7 @@ const personSchema = {
     }
   ],
   sameAs: [
+    'https://devanshujain.dev',
     'https://www.linkedin.com/in/jndevanshu/',
     'https://github.com/jndevanshu',
     'https://scholar.google.com/citations?user=vVnK7c8AAAAJ'
@@ -57,11 +58,11 @@ const personSchema = {
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content="https://devanshujain.dev/profile.jpg" />
+    <meta property="og:image" content="https://standarddev.io/profile.jpg" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content="https://devanshujain.dev/profile.jpg" />
+    <meta name="twitter:image" content="https://standarddev.io/profile.jpg" />
 
     <!-- Schema.org JSON-LD for Google Knowledge Graph & Search Indexing -->
     <script type="application/ld+json" set:html={JSON.stringify(personSchema)} />
